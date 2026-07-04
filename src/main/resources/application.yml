@@ -1,0 +1,33 @@
+# Base configuration - use application-dev.yml or application-prod.yml for specific environments
+# To activate a profile, set: spring.profiles.active=dev or spring.profiles.active=prod
+
+#apligation.yml
+spring:
+  application:
+    name: demo
+  profiles:
+    active: dev
+  datasource:
+    url: "${DATABASE_URL:jdbc:mysql://localhost:3306/userapitest}"
+    username: "${DATABASE_USER:root}"
+    password: "${DATABASE_PASSWORD:}"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+server:
+  port: 2009
+
+jwt:
+  secret: "${JWT_SECRET}"
+  expiration: 900000
+  refresh-expiration: 604800000
+
+app:
+  frontend:
+    url: "${FRONTEND_URL:http://localhost:5173}"
+
+logging:
+  level:
+    root: INFO
+    com.example.robert: DEBUG

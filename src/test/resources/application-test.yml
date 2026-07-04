@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: "jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL"
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  h2:
+    console:
+      enabled: false
+
+jwt:
+  secret: "test-secret-do-testow-jednostkowych-min32znaki"
+  expiration: 900000
+  refresh-expiration: 604800000
+
+app:
+  frontend:
+    url: "http://localhost:5173"

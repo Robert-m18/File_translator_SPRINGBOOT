@@ -1,0 +1,33 @@
+#apligation-dev.yml
+
+spring:
+  application:
+    name: demo
+  datasource:
+    url: "jdbc:mysql://localhost:3306/userapitest"
+    username: root
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 2009
+
+jwt:
+  secret: "dev-only-secret-nie-uzywac-na-produkcji-min-32-znaki"
+  expiration: 900000
+  refresh-expiration: 604800000
+
+app:
+  frontend:
+    url: "http://localhost:5173"
+
+logging:
+  level:
+    root: INFO
+    com.example.robert: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+

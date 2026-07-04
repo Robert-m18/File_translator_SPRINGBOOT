@@ -1,0 +1,33 @@
+#apligation-prod.yml
+spring:
+  application:
+    name: demo
+  datasource:
+    url: "${DATABASE_URL}"
+    username: "${DATABASE_USER}"
+    password: "${DATABASE_PASSWORD}"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+server:
+  port: 8080
+
+jwt:
+  secret: "${JWT_SECRET}"
+  expiration: 900000
+  refresh-expiration: 604800000
+
+app:
+  frontend:
+    url: "${FRONTEND_URL}"
+
+logging:
+  level:
+    root: WARN
+    com.example.robert: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/app.log
