@@ -20,6 +20,7 @@ import java.util.List;
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
 })
+@EqualsAndHashCode(of = "email")
 public class User implements UserDetails {
 
     @Id

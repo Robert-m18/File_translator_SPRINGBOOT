@@ -22,14 +22,19 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private String secret;
+    private final String secret;
+    private final long expiration;
+    private final long refreshExpiration;
 
-    @Value("${jwt.expiration}")
-    private long expiration;
-
-    @Value("${jwt.refresh-expiration}")
-    private long refreshExpiration;
+    public JwtUtil(
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.expiration}") long expiration,
+            @Value("${jwt.refresh-expiration}") long refreshExpiration
+    ) {
+        this.secret = secret;
+        this.expiration = expiration;
+        this.refreshExpiration = refreshExpiration;
+    }
 
     /**
      * Zamienia String na kryptograficzny klucz

@@ -13,7 +13,7 @@ spring:
       enabled: false
 
 jwt:
-  secret: "test-secret-do-testow-jednostkowych-min32znaki"
+  secret: "/26qw1Fh9D6pEAcJpLvCfVDQl0tqYmylZ+EsvPGW4QY="
   expiration: 900000
   refresh-expiration: 604800000
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>21</java.version>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -142,6 +143,33 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<!-- Rozwiązuje wersję/ścieżkę do jara mockito-core na property,
+			     żeby móc podać ją jako -javaagent w Surefire poniżej -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>getClasspathFilenames</id>
+						<goals>
+							<goal>properties</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<!-- -javaagent: rejestruje Mockito jako agenta JVM od razu przy starcie,
+					     zamiast pozwalać mu dołączać się dynamicznie w locie (co JDK
+					     będzie blokować w przyszłych wersjach - stąd ostrzeżenie w logach).
+					     -Dfile.encoding=UTF-8: naprawia zniekształcone polskie znaki w logach na Windows. -->
+					<argLine>-javaagent:${org.mockito:mockito-core:jar} -Dfile.encoding=UTF-8</argLine>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
